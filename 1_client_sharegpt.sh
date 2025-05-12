@@ -31,6 +31,7 @@ for con in $CON; do
         --num-prompts $prompts \
         --max-concurrency $con \
         --port 8000 \
+        --ignore-eos \
         --percentile-metrics ttft,tpot,itl,e2el \
         2>&1 | tee ${LOG}.log
 
