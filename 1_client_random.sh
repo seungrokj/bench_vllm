@@ -2,7 +2,6 @@ export LLAMA_DIR=/models/Llama-3.1-70B-Instruct
 
 CON="4 8 16 32 64 128 256"
 ISL_OSL=("1024:1024" "4096:1024" "1024:4096" )
-ISL_OSL=("1024:1024")
 backend="vllm"
 
 date=$(date +"%Y-%m-%d")

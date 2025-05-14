@@ -1,9 +1,9 @@
 export LLAMA_DIR=/models/Llama-3.1-70B-Instruct
 
 CON="4 8 16 32 64 128 256"
-CON="8 16 32 64 128"
+CON="64"
 ISL_OSL=("1024:1024" "4096:1024" "1024:4096" )
-ISL_OSL=("2000:150")
+ISL_OSL=("1024:10")
 backend="vllm"
 
 date=$(date +"%Y-%m-%d")
@@ -28,8 +28,7 @@ do
     isl=$(echo $in_out | awk -F':' '{ print $1 }')
     osl=$(echo $in_out | awk -F':' '{ print $2 }')
     for con in $CON; do
-        prompts=$((10 * $con))
-        prompts=$((2 * $con))
+        prompts=$((1 * $con))
 
         echo "[RUNNING] prompts $prompts isl $isl osl $osl con $con"
         python3 /app/vllm/benchmarks/benchmark_serving.py \
@@ -41,6 +40,7 @@ do
             --max-concurrency $con \
             --port 8000 \
             --ignore-eos \
+            --profile \
             --percentile-metrics ttft,tpot,itl,e2el \
             2>&1 | tee ${LOG}.log
 
