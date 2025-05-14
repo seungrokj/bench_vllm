@@ -1,6 +1,6 @@
 export LLAMA_DIR=/models/Llama-3.1-70B-Instruct
 
-CON="1 2 4 8 16 32 64"
+CON="1 2 4 8 16 32"
 backend="vllm"
 
 date=$(date +"%Y-%m-%d")
